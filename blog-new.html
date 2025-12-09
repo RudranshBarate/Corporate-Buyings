@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Expandable Blog Cards</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    background: #f4f5f9;
+}
+
+*:focus {
+    outline: none !important;
+}
+
+.navbar {
+    height: 150px;
+    width: 100%;
+    background: #0d1b40;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 5px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo */
+.logo img {
+    height: 110px;
+    width: auto;
+}
+
+.separator {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: 0.25s;
+}
+
+.nav-links li a:hover {
+    background: #6366f1;
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        height: 145px;
+    }
+    .nav-links {
+        gap: 18px;
+    }
+    .logo img {
+        height: 110px;
+    }
+}
+
+.card {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+    transition: 0.25s ease;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.card-img {
+    width: 100%;
+    height: 230px;
+    background: #e4e4e4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b1b1b1;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Card Content */
+.card-content {
+    padding: 28px 32px;
+}
+
+.card-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0d1b40;
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.55;
+}
+
+.btn {
+    background: #6366f1;
+    color: #fff;
+    padding: 10px 24px;
+    font-size: 13px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.25s;
+    border: none;
+}
+
+.btn:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+}
+
+.hidden-content {
+    max-height: 0;
+    overflow: hidden;
+    background: #ffffff;
+    transition: max-height 0.45s ease, padding 0.45s ease;
+    padding: 0 32px;
+}
+
+.hidden-content.open {
+    padding: 25px 32px;
+    max-height: 2000px;
+}
+
+.hidden-content p,
+.hidden-content ul,
+.hidden-content ol {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Small Buttons */
+.small-btn {
+    margin-top: 15px;
+    margin-right: 10px;
+    padding: 8px 20px;
+    font-size: 12px;
+    border-radius: 6px;
+    background: #0d1b40;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.small-btn:hover {
+    background: #112d66;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .card {
+        width: 95%;
+        margin: 25px auto;
+    }
+
+    .card-img {
+        height: 180px;
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+
+    .hidden-content {
+        padding: 0 20px;
+    }
+
+    .hidden-content.open {
+        padding: 20px;
+        max-height: 3000px; /* bigger for long content */
+    }
+
+    .card-title {
+        font-size: 19px;
+    }
+
+    .card-desc {
+        font-size: 13px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<header>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="favicons/android-chrome-192x192.png" alt="Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <span class="separator">|</span>
+                <li><a href="index.html#blog-section">BLOG</a></li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+
+
+<!-- CARD 1 – CORPORATE BUYING -->
+<div class="card">
+    <div class="card-img">Upload Image Here</div>
+
+    <div class="card-content">
+        <h2 class="card-title">What Is Corporate Buying?</h2>
+        <p class="card-desc">
+            Corporate buying helps businesses streamline procurement, reduce costs, and build strong supplier relationships by standardizing purchasing processes, improving negotiation power, and ensuring consistent access to high-quality materials and services....
+        </p>
+
+        <span class="btn" onclick="toggleContent('content1')">Read More</span>
+    </div>
+
+    <!-- Hidden Content -->
+    <div id="content1" class="hidden-content">
+
+        <!-- <h2 style="font-size:20px; margin-top:0; font-weight:700; color:#0d1b40;">
+            What Is Corporate Buying?
+        </h2>
+
+        <p class="subtitle" style="font-size:13px; color:#777; margin-bottom:15px;">
+            A Beginner’s Guide for Modern Businesses
+        </p> -->
+
+        <div class="highlight-box" 
+             style="background:#f7f8ff; border-left:4px solid #6366f1; padding:12px 18px; 
+             margin: 15px 0; font-size:14px; line-height:1.6; border-radius:8px;">
+            Discover what corporate buying, bulk purchasing, and corporate procurement mean, 
+            why businesses use them, and how they improve efficiency, reduce costs, and support smooth operations.
+        </div>
+
+        <h3 style="font-size:17px; margin-top:25px; color:#0d1b40;">Introduction</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            In a fast-moving business world, the way companies purchase products and services has evolved. 
+            Today, organizations rely on corporate buying to streamline processes, cut costs, and maintain 
+            consistency across their operations. Whether it’s office supplies, equipment, software, or 
+            raw materials, smart purchasing decisions play a major role in strengthening business performance.
+        </p>
+
+        <h3 style="font-size:17px; margin-top:25px; color:#0d1b40;">What Is Corporate Buying?</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            Corporate buying is the strategic process where businesses purchase goods or services 
+            in bulk to meet operational needs at the best possible value. 
+            Unlike individual shoppers, companies follow a structured method that includes:
+        </p>
+
+        <ul style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li>Selecting trusted suppliers</li>
+            <li>Negotiating better pricing</li>
+            <li>Ensuring consistent quality</li>
+            <li>Planning purchases based on long-term needs</li>
+        </ul>
+
+        <p style="font-size:14px; line-height:1.7;">
+            This approach helps organizations build efficiency, maintain steady inventory, 
+            and run day-to-day operations without interruptions.
+        </p>
+
+        <h3 style="font-size:17px; margin-top:25px; color:#0d1b40;">Key Advantages of Corporate Buying</h3>
+
+        <ol style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li><strong>Cost Savings</strong> – Bulk purchasing lowers unit costs.</li>
+            <li><strong>Efficiency & Time Savings</strong> – Less repetitive ordering.</li>
+            <li><strong>Supplier Relationships</strong> – Strong long-term partnerships.</li>
+            <li><strong>Consistent Quality</strong> – Uniformity across departments.</li>
+            <li><strong>Inventory Stability</strong> – Prevents shortages.</li>
+            <li><strong>Better Planning & Control</strong> – Reduces unnecessary spending.</li>
+        </ol>
+
+        <h3 style="font-size:17px; margin-top:25px; color:#0d1b40;">Why Corporate Buying Matters Today</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            With rising competition, companies must operate smarter and faster. 
+            Corporate procurement improves:
+        </p>
+
+        <ul style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li>Cost management</li>
+            <li>Productivity</li>
+            <li>Resource planning</li>
+            <li>Supply chain stability</li>
+        </ul>
+
+        <p style="font-size:14px; line-height:1.7;">
+            It ensures every team gets what they need—on time and within budget.
+        </p>
+
+        <h3 style="font-size:17px; margin-top:25px; color:#0d1b40;">Conclusion</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            Corporate buying boosts efficiency, reduces costs, and strengthens supplier relationships — 
+            giving businesses long-term stability and an edge over competitors.
+        </p>
+
+        <h3 style="font-size:17px; margin-top:25px; color:#0d1b40;">FAQs</h3>
+
+        <p style="font-size:14px; line-height:1.7;">
+            <strong>1. Is corporate buying only for large companies?</strong><br>
+            No — small and medium businesses benefit too.
+        </p>
+
+        <p style="font-size:14px; line-height:1.7;">
+            <strong>2. How does corporate buying reduce costs?</strong><br>
+            Bulk orders reduce unit pricing, shipping, and admin workload.
+        </p>
+
+        <p style="font-size:14px; line-height:1.7;">
+            <strong>3. What’s the difference between corporate buying and retail buying?</strong><br>
+            Retail buying is individual; corporate buying is bulk, strategic, and supplier-driven.
+        </p>
+
+        <div style="margin-top:25px;">
+            <span class="btn small-btn" onclick="toggleContent('content1')">Read Less</span>
+            <a href="index.html" class="btn small-btn">Back to Home</a>
+            <!-- <a href="index.html#blog-section" class="btn small-btn">Back to Blog</a> -->
+        </div>
+
+        <br><br>
+    </div>
+</div>
+
+
+
+<!-- CARD 2 – ARC -->
+<div class="card">
+    <div class="card-img">Upload Image Here</div>
+
+    <div class="card-content">
+        <h2 class="card-title">What Is an ARC (Annual Rate Contract)?</h2>
+        <p class="card-desc">
+            An Annual Rate Contract (ARC) helps businesses achieve price stability, better long-term procurement planning, and improved vendor management by fixing rates in advance and reducing the risk of fluctuating market prices....
+        </p>
+
+        <span class="btn" onclick="toggleContent('content2')">Read More</span>
+    </div>
+
+    <!-- Hidden Content -->
+    <div id="content2" class="hidden-content">
+
+        <!-- <h2 style="font-size:20px; margin-top:0; font-weight:700; color:#0d1b40;">
+            What Is an ARC (Annual Rate Contract)?
+        </h2> -->
+
+        <div class="highlight-box" 
+             style="background:#f7f8ff; border-left:4px solid #6366f1; padding:12px 18px; 
+             margin:15px 0; font-size:14px; line-height:1.6; border-radius:8px;">
+            Learn how an Annual Rate Contract (ARC) helps businesses achieve price stability, 
+            better procurement strategy, and stronger vendor management through long-term, fixed-rate agreements.
+        </div>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Introduction</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            In the world of corporate procurement, companies are constantly searching for ways to control 
+            costs and maintain consistent quality. One of the most effective tools businesses use today is the 
+            Annual Rate Contract (ARC). It simplifies purchasing, reduces financial risks, and strengthens long-term 
+            supplier relationships—making it a game-changer for modern organizations.
+        </p>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">What Is an ARC?</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            An ARC (Annual Rate Contract) is a long-term agreement between a company and a supplier where 
+            the price of specific products or services is fixed for one full year. This ensures that the 
+            business remains unaffected by market price increases, shortages, or fluctuations during the contract period.
+        </p>
+
+        <p style="font-size:14px; line-height:1.7;">
+            By locking in pricing for the year, companies secure:
+        </p>
+
+        <ul style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li>Stable and predictable procurement costs</li>
+            <li>Continuous and uninterrupted supply</li>
+            <li>Consistent quality from reliable vendors</li>
+        </ul>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Why Do Businesses Use ARC?</h3>
+
+        <ol style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li><strong>Price Stability</strong> – Protects businesses from sudden market fluctuations.</li>
+            <li><strong>Cost Control</strong> – Enables better budgeting and long-term expense planning.</li>
+            <li><strong>Stronger Vendor Relationships</strong> – Builds trust and ensures priority support.</li>
+            <li><strong>Consistent Quality</strong> – Using the same supplier means uniformity in quality.</li>
+            <li><strong>Faster Procurement Process</strong> – Reduces repetitive negotiations and RFQs.</li>
+            <li><strong>Reduced Administrative Work</strong> – Less paperwork and fewer approvals needed.</li>
+        </ol>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">How ARC Helps Modern Businesses Grow</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            In a competitive environment, efficient procurement systems are essential. 
+            ARC provides long-term stability and advantages such as:
+        </p>
+
+        <ul style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li>Reliable stock availability</li>
+            <li>Better supply chain management</li>
+            <li>Improved operational stability</li>
+            <li>Long-term cost savings</li>
+            <li>More organized purchasing patterns</li>
+        </ul>
+
+        <p style="font-size:14px; line-height:1.7;">
+            With ARC, companies can focus on growth while maintaining complete control over procurement.
+        </p>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Conclusion</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            An Annual Rate Contract (ARC) is more than a pricing agreement—it is a strategic procurement tool 
+            that helps businesses manage costs, ensure reliable supply, and strengthen vendor relationships. 
+            Whether small or large, every organization can benefit from integrating ARC into their buying strategy.
+        </p>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Keywords</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            Annual Rate Contract, ARC in corporate buying, corporate procurement, bulk purchasing, supplier contract, 
+            fixed-rate agreement, price stability, procurement strategy, vendor management, cost control in business, 
+            corporate sourcing
+        </p>
+
+        <div style="margin-top:25px;">
+            <span class="btn small-btn" onclick="toggleContent('content2')">Read Less</span>
+            <a href="index.html" class="btn small-btn">Back to Home</a>
+            <!-- <a href="index.html#blog-section" class="btn small-btn">Back to Blog</a> -->
+        </div>
+
+        <br><br>
+    </div>
+</div>
+
+<!-- CARD 3 – AMC -->
+<div class="card">
+    <div class="card-img">Upload Image Here</div>
+
+    <div class="card-content">
+        <h2 class="card-title">What Is an AMC?</h2>
+        <p class="card-desc">
+            Understand how an Annual Maintenance Contract (AMC) reduces downtime, improves equipment life, and ensures uninterrupted business operations through scheduled maintenance, expert support, proactive system care, and timely repair services that keep all critical equipment running efficiently....        </p>
+        <span class="btn" onclick="toggleContent('content3')">Read More</span>
+    </div>
+
+    <!-- Hidden Content -->
+    <div id="content3" class="hidden-content">
+
+        <div class="highlight-box" 
+             style="background:#f7f8ff; border-left:4px solid #6366f1; padding:12px 18px; 
+             margin:15px 0; font-size:14px; line-height:1.6; border-radius:8px;">
+            AMC ensures regular maintenance, reduces downtime, and improves the lifespan of equipment, 
+            helping businesses maintain uninterrupted operations with expert support throughout the year.
+        </div>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Introduction</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            In today’s business world, companies rely heavily on machinery, IT systems, and critical equipment. 
+            Any breakdown can cause delays, losses, and operational issues. To prevent this, organizations use 
+            Annual Maintenance Contracts (AMC), which ensure regular maintenance and fast support throughout the year.
+        </p>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">What Is an AMC?</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            An AMC (Annual Maintenance Contract) is a yearly service agreement between a company and a maintenance provider. 
+            It ensures that all equipment, machines, and systems receive periodic servicing, inspections, repairs, and technical support whenever needed.
+        </p>
+
+        <p style="font-size:14px; line-height:1.7;">
+            Businesses commonly use AMCs for:
+        </p>
+
+        <ul style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li>IT systems (computers, servers, networks)</li>
+            <li>Manufacturing machinery</li>
+            <li>Office devices (printers, CCTV, AC units, UPS)</li>
+            <li>Electrical & mechanical systems</li>
+            <li>Software updates & technical support</li>
+        </ul>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Types of AMC</h3>
+        <ol style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li><strong>Comprehensive AMC</strong> – Includes maintenance, services, repairs, and replacement of faulty components.</li>
+            <li><strong>Non-Comprehensive AMC</strong> – Covers service and labor only; spare parts are charged separately.</li>
+        </ol>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Why Do Businesses Use AMC?</h3>
+        <ol style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li><strong>Reduced Downtime</strong> – Regular maintenance prevents sudden breakdowns.</li>
+            <li><strong>Cost Savings</strong> – Avoids expensive repairs by preventing major failures.</li>
+            <li><strong>Longer Equipment Life</strong> – Well-maintained machines last years longer.</li>
+            <li><strong>Priority Support</strong> – Issues are resolved quickly with dedicated technicians.</li>
+            <li><strong>Consistent Performance</strong> – Ensures systems run efficiently all year.</li>
+            <li><strong>Peace of Mind</strong> – Removes the stress of unexpected equipment failures.</li>
+        </ol>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">How AMC Helps Business Operations</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            AMC ensures long-term stability, reduced risk, and improved performance of all essential systems. Major benefits include:
+        </p>
+
+        <ul style="font-size:14px; line-height:1.7; margin-left:20px;">
+            <li>Higher productivity & fewer delays</li>
+            <li>Predictable annual maintenance expenses</li>
+            <li>Lower risk of breakdowns</li>
+            <li>Smarter resource planning</li>
+            <li>Better safety & compliance</li>
+        </ul>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Conclusion</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            An Annual Maintenance Contract (AMC) provides complete reliability for businesses that depend on machinery and technology. 
+            It ensures smooth operations, reduces risk, and keeps equipment running efficiently, making it a smart long-term investment for any organization.
+        </p>
+
+        <h3 style="font-size:17px; color:#0d1b40; margin-top:25px;">Keywords</h3>
+        <p style="font-size:14px; line-height:1.7;">
+            Annual Maintenance Contract, AMC in business, maintenance services, corporate equipment care, IT support contract, preventive maintenance, machinery service agreement, equipment uptime, business continuity support
+        </p>
+
+        <div style="margin-top:25px;">
+            <span class="btn small-btn" onclick="toggleContent('content3')">Read Less</span>
+            <a href="index.html" class="btn small-btn">Back to Home</a>
+            <!-- <a href="index.html#blog-section" class="btn small-btn">Back to Blog</a> -->
+        </div>
+
+        <br><br>
+    </div>
+</div>
+
+
+<script>
+    function toggleContent(id) {
+        const section = document.getElementById(id);
+    
+        // READ MORE button (above)
+        const readMoreBtn = document.querySelector(
+            `.card-content .btn[onclick="toggleContent('${id}')"]`
+        );
+    
+        // READ LESS button (inside hidden content)
+        const readLessBtn = section.querySelector(
+            `.btn[onclick="toggleContent('${id}')"]`
+        );
+    
+        // If section is CLOSED → OPEN it
+        if (!section.classList.contains("open")) {
+            section.classList.add("open");
+    
+            if (readMoreBtn) readMoreBtn.style.display = "none";
+            if (readLessBtn) readLessBtn.style.display = "inline-block";
+    
+        } 
+        // If section is OPEN → CLOSE it
+        else {
+            section.classList.remove("open");
+    
+            if (readMoreBtn) readMoreBtn.style.display = "inline-block";
+            if (readLessBtn) readLessBtn.style.display = "none";
+        }
+    }
+    </script>
+    
+
+
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "CORPORATE BUYINGS_TEMPLATE",
+			"path": ".."
+		},
+		{
+			"name": "Updated_Corporate",
+			"path": "../../../Desktop/Updated_Corporate"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "CORPORATE BUYINGS_TEMPLATE"
+	}
+}
